@@ -170,6 +170,23 @@
                 <version>${ruoyi.version}</version>
             </dependency>
 
+            <!-- SDK -->
+            <dependency>
+                <groupId>com.ruoyi</groupId>
+                <artifactId>system-sdk-core</artifactId>
+                <version>${ruoyi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ruoyi</groupId>
+                <artifactId>system-sdk-db</artifactId>
+                <version>${ruoyi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ruoyi</groupId>
+                <artifactId>system-sdk-http</artifactId>
+                <version>${ruoyi.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -180,6 +197,9 @@
         <module>ruoyi-quartz</module>
         <module>ruoyi-generator</module>
         <module>ruoyi-common</module>
+        <module>system-sdk-core</module>
+        <module>system-sdk-db</module>
+        <module>system-sdk-http</module>
     </modules>
     <packaging>pom</packaging>
 

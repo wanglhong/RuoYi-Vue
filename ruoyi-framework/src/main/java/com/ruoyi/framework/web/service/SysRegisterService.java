@@ -1,5 +1,6 @@
 package com.ruoyi.framework.web.service;
 
+import com.ruoyi.sdk.SystemSdk;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.ruoyi.common.constant.CacheConstants;
@@ -16,8 +17,6 @@ import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.manager.AsyncManager;
 import com.ruoyi.framework.manager.factory.AsyncFactory;
-import com.ruoyi.system.service.ISysConfigService;
-import com.ruoyi.system.service.ISysUserService;
 
 /**
  * 注册校验方法
@@ -27,12 +26,6 @@ import com.ruoyi.system.service.ISysUserService;
 @Component
 public class SysRegisterService
 {
-    @Autowired
-    private ISysUserService userService;
-
-    @Autowired
-    private ISysConfigService configService;
-
     @Autowired
     private RedisCache redisCache;
 
@@ -46,7 +39,7 @@ public class SysRegisterService
         sysUser.setUserName(username);
 
         // 验证码开关
-        boolean captchaEnabled = configService.selectCaptchaEnabled();
+        boolean captchaEnabled = SystemSdk.getSdkConfigService().selectCaptchaEnabled();
         if (captchaEnabled)
         {
             validateCaptcha(username, registerBody.getCode(), registerBody.getUuid());
@@ -70,7 +63,7 @@ public class SysRegisterService
         {
             msg = "密码长度必须在5到20个字符之间";
         }
-        else if (!userService.checkUserNameUnique(sysUser))
+        else if (!SystemSdk.getSdkUserService().checkUserNameUnique(sysUser))
         {
             msg = "保存用户'" + username + "'失败，注册账号已存在";
         }
@@ -79,7 +72,7 @@ public class SysRegisterService
             sysUser.setNickName(username);
             sysUser.setPwdUpdateDate(DateUtils.getNowDate());
             sysUser.setPassword(SecurityUtils.encryptPassword(password));
-            boolean regFlag = userService.registerUser(sysUser);
+            boolean regFlag = SystemSdk.getSdkUserService().registerUser(sysUser);
             if (!regFlag)
             {
                 msg = "注册失败,请联系系统管理人员";

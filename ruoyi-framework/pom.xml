@@ -56,7 +56,13 @@
         <!-- 系统模块-->
         <dependency>
             <groupId>com.ruoyi</groupId>
-            <artifactId>ruoyi-system</artifactId>
+            <artifactId>system-sdk-db</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.ruoyi</groupId>
+                    <artifactId>ruoyi-system</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
     </dependencies>
