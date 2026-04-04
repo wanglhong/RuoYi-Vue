@@ -10,7 +10,7 @@ import org.springframework.boot.jdbc.autoconfigure.DataSourceAutoConfiguration;
  */
 @SpringBootApplication(
         exclude = {DataSourceAutoConfiguration.class},
-        scanBasePackages = {"com.ruoyi"}
+        scanBasePackages = {"com.ruoyi", "cn.wlih.test"}
 )
 public class RuoYiTestApplication {
 
