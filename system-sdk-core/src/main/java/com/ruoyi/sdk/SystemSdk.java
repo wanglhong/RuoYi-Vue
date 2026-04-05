@@ -43,7 +43,7 @@ public class SystemSdk {
             SdkPlugin activePlugin = pluginManager.getActivePlugin();
             if (activePlugin == null) {
                 log.warning("未找到可用的 SDK 插件");
-                return;
+                throw new RuntimeException("未找到可用的 SDK 插件");
             }
             log.info("已激活插件：" + activePlugin.getName() + " (优先级：" + activePlugin.getPriority() + ")");
             // 根据插件类型加载对应的服务实现

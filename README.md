@@ -3,6 +3,141 @@
 </p>
 <h1 align="center" style="margin: 30px 0 30px; font-weight: bold;">RuoYi v3.9.2</h1>
 <h4 align="center">基于SpringBoot+Vue前后端分离的Java快速开发框架</h4>
+
+---
+
+## 🚀 启动方式
+
+### 自定义启动类
+
+本框架提供 `RuoYiApplication.run()` 替代传统的 `SpringApplication.run()`，简化启动配置。
+
+```java
+import com.ruoyi.RuoYiApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class RuoYiAdminApplication {
+    public static void main(String[] args) {
+        RuoYiApplication.run(RuoYiAdminApplication.class, args);
+    }
+}
+```
+
+> **注意**：启动类只需添加 `@SpringBootApplication` 注解，无需额外配置。框架会自动完成数据源、Redis 等核心组件的初始化。
+
+### 环境要求
+- JDK 17+ / Node.js 8.9+ / MySQL 5.7+ / Redis 3.0+ / Maven 3.0+
+
+### 数据库初始化
+```bash
+mysql -u root -p < sql/ry_20260321.sql
+```
+
+### 后端启动
+```bash
+mvn clean package -DskipTests
+./ry.sh start   # Linux/macOS
+ry.bat          # Windows
+```
+
+### 前端启动
+```bash
+cd ruoyi-ui && npm install && npm run dev
+```
+
+### 访问地址
+| 服务 | 地址 | 账号 |
+|------|------|------|
+| 后台 | http://localhost:8080 | admin / admin123 |
+| Swagger | http://localhost:8080/swagger-ui.html | - |
+| Druid监控 | http://localhost:8080/druid/ | ruoyi / 123456 |
+
+---
+
+## 📦 SDK 模块
+
+本框架提供 SDK 模块，可将若依的系统管理功能（用户、角色、菜单、字典等）封装为独立 SDK，供其他业务系统集成使用，无需直接依赖 ruoyi-system 源码。
+
+| 模块 | 说明                                                    |
+|------|-------------------------------------------------------|
+| system-sdk-core | SDK 核心模块（依赖 ruoyi-common(主要是一些实体模型，未使用其中的Spring相关特性)） |
+| system-sdk-db | SDK 数据库模块（依赖 system-sdk-core、ruoyi-system）            |
+| system-sdk-http | SDK HTTP 模块（依赖 system-sdk-core）                       |
+
+### 集成示例
+
+#### 1. 添加 Maven 依赖
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>ruoyi</artifactId>
+        <groupId>com.ruoyi</groupId>
+        <version>3.9.2</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>jar</packaging>
+    <artifactId>your-app</artifactId>
+
+    <dependencies>
+        <!-- 核心模块 -->
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>ruoyi-framework</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>system-sdk-db</artifactId>
+        </dependency>
+
+        <!-- MySQL 驱动 -->
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <addResources>true</addResources>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <finalName>${project.artifactId}</finalName>
+    </build>
+</project>
+```
+
+#### 2. 编写启动类
+```java
+import com.ruoyi.RuoYiApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class MyAppApplication {
+    public static void main(String[] args) {
+        RuoYiApplication.run(MyAppApplication.class, args);
+    }
+}
+```
+
+---
+
+
 <p align="center">
 	<a href="https://gitee.com/y_project/RuoYi-Vue/stargazers"><img src="https://gitee.com/y_project/RuoYi-Vue/badge/star.svg?theme=dark"></a>
 	<a href="https://gitee.com/y_project/RuoYi-Vue"><img src="https://img.shields.io/badge/RuoYi-v3.9.2-brightgreen.svg"></a>

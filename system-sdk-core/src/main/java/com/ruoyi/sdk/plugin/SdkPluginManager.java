@@ -65,9 +65,10 @@ public class SdkPluginManager {
      */
     private void selectActivePlugin() {
         if (loadedPlugins.isEmpty()) {
-            log.warning("未找到任何可用的 SDK 插件");
-            this.activePlugin = null;
-            return;
+//            log.warning("未找到任何可用的 SDK 插件");
+//            this.activePlugin = null;
+//            return;
+            throw new IllegalStateException("未找到任何可用的 SDK 插件");
         }
         // 找到第一个可用的插件（因为已经按优先级排序）
         this.activePlugin = loadedPlugins.stream()

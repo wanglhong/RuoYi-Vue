@@ -1,5 +1,6 @@
 package com.ruoyi;
 
+import com.ruoyi.sdk.SystemSdk;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.jdbc.autoconfigure.DataSourceAutoConfiguration;
@@ -18,6 +19,7 @@ public class RuoYiApplication {
      */
     public static void run(Class<?> mainApplicationClass, String[] args) {
         SpringApplication.run(new Class<?>[]{mainApplicationClass, RuoYiApplication.class}, args);
+        SystemSdk.init();
     }
 
 }
