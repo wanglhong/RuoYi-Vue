@@ -7,6 +7,8 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.regex.Pattern;
 import org.apache.commons.lang3.RegExUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
@@ -26,6 +28,7 @@ import com.ruoyi.common.annotation.Anonymous;
 @Configuration
 public class PermitAllUrlProperties implements InitializingBean, ApplicationContextAware
 {
+    private static final Logger log = LoggerFactory.getLogger(PermitAllUrlProperties.class);
     private static final Pattern PATTERN = Pattern.compile("\\{(.*?)\\}");
 
     private ApplicationContext applicationContext;
@@ -43,16 +46,22 @@ public class PermitAllUrlProperties implements InitializingBean, ApplicationCont
 
         map.keySet().forEach(info -> {
             HandlerMethod handlerMethod = map.get(info);
-
+            log.trace("====> {} ---> {}", handlerMethod.getBeanType().getSimpleName(), handlerMethod.getMethod().getName());
             // 获取方法上边的注解 替代path variable 为 *
             Anonymous method = AnnotationUtils.findAnnotation(handlerMethod.getMethod(), Anonymous.class);
             Optional.ofNullable(method).ifPresent(anonymous -> Objects.requireNonNull(info.getPathPatternsCondition().getPatternValues())
-                    .forEach(url -> urls.add(RegExUtils.replaceAll(url, PATTERN, ASTERISK))));
+                    .forEach(url -> {
+                        log.debug("[匿名访问不鉴权地址] {}", url);
+                        urls.add(RegExUtils.replaceAll(url, PATTERN, ASTERISK));
+                    }));
 
             // 获取类上边的注解, 替代path variable 为 *
             Anonymous controller = AnnotationUtils.findAnnotation(handlerMethod.getBeanType(), Anonymous.class);
             Optional.ofNullable(controller).ifPresent(anonymous -> Objects.requireNonNull(info.getPathPatternsCondition().getPatternValues())
-                    .forEach(url -> urls.add(RegExUtils.replaceAll(url, PATTERN, ASTERISK))));
+                    .forEach(url -> {
+                        log.debug("[匿名访问不鉴权地址] {}", url);
+                        urls.add(RegExUtils.replaceAll(url, PATTERN, ASTERISK));
+                    }));
         });
     }
 
