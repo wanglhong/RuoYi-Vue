@@ -1,11 +1,13 @@
 package cn.wlih.test;
 
 import com.ruoyi.RuoYiApplication;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * 若依框架测试项目-启动程序
  */
+@MapperScan({"com.ruoyi.**.domain", "cn.wlih.test.mapper"})
 @SpringBootApplication
 public class RuoYiTestApplication {
 

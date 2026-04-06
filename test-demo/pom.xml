@@ -42,9 +42,13 @@
             <groupId>com.ruoyi</groupId>
             <artifactId>ruoyi-framework</artifactId>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.ruoyi</groupId>-->
+<!--            <artifactId>system-sdk-db</artifactId>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>com.ruoyi</groupId>
-            <artifactId>system-sdk-db</artifactId>
+            <artifactId>system-sdk-http</artifactId>
         </dependency>
 
         <dependency>

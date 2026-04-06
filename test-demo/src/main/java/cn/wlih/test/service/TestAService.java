@@ -1,5 +1,8 @@
 package cn.wlih.test.service;
 
-public interface TestAService {
+import cn.wlih.test.model.TestA;
+import com.ruoyi.common.core.service.BaseService;
+
+public interface TestAService extends BaseService<TestA> {
 
 }

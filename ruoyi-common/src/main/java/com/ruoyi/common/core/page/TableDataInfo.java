@@ -25,6 +25,19 @@ public class TableDataInfo implements Serializable
     private String msg;
 
     /**
+     * 创建表格数据对象
+     *
+     * @param list list
+     * @return TableDataInfo
+     */
+    public static TableDataInfo of(List<?> list) {
+        if (list instanceof PageList<?> pageList) {
+            return new TableDataInfo(pageList, pageList.getTotal());
+        }
+        return new TableDataInfo(list, list != null ? list.size() : 0);
+    }
+
+    /**
      * 表格数据对象
      */
     public TableDataInfo()

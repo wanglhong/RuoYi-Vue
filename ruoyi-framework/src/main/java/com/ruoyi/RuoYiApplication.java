@@ -3,12 +3,13 @@ package com.ruoyi;
 import com.ruoyi.sdk.SystemSdk;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.jdbc.autoconfigure.DataSourceAutoConfiguration;
+import org.springframework.boot.jdbc.autoconfigure.DataSourceAutoConfiguration; // spring-boot-jdbc
 
 /**
  * 若依框架启动类
  */
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+//@SpringBootApplication
 public class RuoYiApplication {
 
     /**
