@@ -47,6 +47,10 @@
             <groupId>com.ruoyi</groupId>
             <artifactId>ruoyi-system</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>system-sdk-db</artifactId>
+        </dependency>
 
         <!-- 定时任务-->
         <dependency>

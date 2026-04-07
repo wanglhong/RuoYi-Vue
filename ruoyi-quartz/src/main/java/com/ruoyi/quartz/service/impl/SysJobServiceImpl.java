@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.ruoyi.common.constant.ScheduleConstants;
+import com.ruoyi.common.core.service.BaseServiceImpl;
 import com.ruoyi.common.exception.job.TaskException;
 import com.ruoyi.quartz.domain.SysJob;
 import com.ruoyi.quartz.mapper.SysJobMapper;
@@ -23,13 +24,10 @@ import com.ruoyi.quartz.util.ScheduleUtils;
  * @author ruoyi
  */
 @Service
-public class SysJobServiceImpl implements ISysJobService
+public class SysJobServiceImpl extends BaseServiceImpl<SysJobMapper, SysJob> implements ISysJobService
 {
     @Autowired
     private Scheduler scheduler;
-
-    @Autowired
-    private SysJobMapper jobMapper;
 
     /**
      * 项目启动时，初始化定时器 主要是防止手动修改数据库导致未同步到定时任务处理（注：不能手动修改数据库ID和任务组名，否则会导致脏数据）
@@ -38,7 +36,7 @@ public class SysJobServiceImpl implements ISysJobService
     public void init() throws SchedulerException, TaskException
     {
         scheduler.clear();
-        List<SysJob> jobList = jobMapper.selectJobAll();
+        List<SysJob> jobList = super.mapper.selectJobAll();
         for (SysJob job : jobList)
         {
             ScheduleUtils.createScheduleJob(scheduler, job);
@@ -54,7 +52,7 @@ public class SysJobServiceImpl implements ISysJobService
     @Override
     public List<SysJob> selectJobList(SysJob job)
     {
-        return jobMapper.selectJobList(job);
+        return super.mapper.selectJobList(job);
     }
 
     /**
@@ -66,7 +64,7 @@ public class SysJobServiceImpl implements ISysJobService
     @Override
     public SysJob selectJobById(Long jobId)
     {
-        return jobMapper.selectJobById(jobId);
+        return super.mapper.selectJobById(jobId);
     }
 
     /**
@@ -81,7 +79,7 @@ public class SysJobServiceImpl implements ISysJobService
         Long jobId = job.getJobId();
         String jobGroup = job.getJobGroup();
         job.setStatus(ScheduleConstants.Status.PAUSE.getValue());
-        int rows = jobMapper.updateJob(job);
+        int rows = super.mapper.updateJob(job);
         if (rows > 0)
         {
             scheduler.pauseJob(ScheduleUtils.getJobKey(jobId, jobGroup));
@@ -101,7 +99,7 @@ public class SysJobServiceImpl implements ISysJobService
         Long jobId = job.getJobId();
         String jobGroup = job.getJobGroup();
         job.setStatus(ScheduleConstants.Status.NORMAL.getValue());
-        int rows = jobMapper.updateJob(job);
+        int rows = super.mapper.updateJob(job);
         if (rows > 0)
         {
             scheduler.resumeJob(ScheduleUtils.getJobKey(jobId, jobGroup));
@@ -120,7 +118,7 @@ public class SysJobServiceImpl implements ISysJobService
     {
         Long jobId = job.getJobId();
         String jobGroup = job.getJobGroup();
-        int rows = jobMapper.deleteJobById(jobId);
+        int rows = super.mapper.deleteJobById(jobId);
         if (rows > 0)
         {
             scheduler.deleteJob(ScheduleUtils.getJobKey(jobId, jobGroup));
@@ -140,7 +138,7 @@ public class SysJobServiceImpl implements ISysJobService
     {
         for (Long jobId : jobIds)
         {
-            SysJob job = jobMapper.selectJobById(jobId);
+            SysJob job = super.mapper.selectJobById(jobId);
             deleteJob(job);
         }
     }
@@ -202,7 +200,7 @@ public class SysJobServiceImpl implements ISysJobService
     public int insertJob(SysJob job) throws SchedulerException, TaskException
     {
         job.setStatus(ScheduleConstants.Status.PAUSE.getValue());
-        int rows = jobMapper.insertJob(job);
+        int rows = super.mapper.insertJob(job);
         if (rows > 0)
         {
             ScheduleUtils.createScheduleJob(scheduler, job);
@@ -220,7 +218,7 @@ public class SysJobServiceImpl implements ISysJobService
     public int updateJob(SysJob job) throws SchedulerException, TaskException
     {
         SysJob properties = selectJobById(job.getJobId());
-        int rows = jobMapper.updateJob(job);
+        int rows = super.mapper.updateJob(job);
         if (rows > 0)
         {
             updateSchedulerJob(job, properties.getJobGroup());

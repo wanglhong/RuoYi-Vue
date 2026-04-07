@@ -1,6 +1,7 @@
 package com.ruoyi.generator.mapper;
 
 import java.util.List;
+import com.mybatisflex.core.BaseMapper;
 import com.ruoyi.generator.domain.GenTableColumn;
 
 /**
@@ -8,7 +9,7 @@ import com.ruoyi.generator.domain.GenTableColumn;
  * 
  * @author ruoyi
  */
-public interface GenTableColumnMapper
+public interface GenTableColumnMapper extends BaseMapper<GenTableColumn>
 {
     /**
      * 根据表名称查询列信息

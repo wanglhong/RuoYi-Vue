@@ -1,6 +1,7 @@
 package com.ruoyi.system.service;
 
 import java.util.List;
+import com.ruoyi.common.core.service.BaseService;
 import com.ruoyi.system.domain.SysOperLog;
 
 /**
@@ -8,7 +9,7 @@ import com.ruoyi.system.domain.SysOperLog;
  * 
  * @author ruoyi
  */
-public interface ISysOperLogService
+public interface ISysOperLogService extends BaseService<SysOperLog>
 {
     /**
      * 新增操作日志

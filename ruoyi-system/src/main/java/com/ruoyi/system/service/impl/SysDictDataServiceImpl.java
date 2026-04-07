@@ -1,23 +1,21 @@
 package com.ruoyi.system.service.impl;
 
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.common.core.domain.entity.SysDictData;
+import com.ruoyi.common.core.service.BaseServiceImpl;
 import com.ruoyi.common.utils.DictUtils;
 import com.ruoyi.system.mapper.SysDictDataMapper;
 import com.ruoyi.system.service.ISysDictDataService;
 
 /**
  * 字典 业务层处理
- * 
+ *
  * @author ruoyi
  */
 @Service
-public class SysDictDataServiceImpl implements ISysDictDataService
+public class SysDictDataServiceImpl extends BaseServiceImpl<SysDictDataMapper, SysDictData> implements ISysDictDataService
 {
-    @Autowired
-    private SysDictDataMapper dictDataMapper;
 
     /**
      * 根据条件分页查询字典数据
@@ -28,7 +26,7 @@ public class SysDictDataServiceImpl implements ISysDictDataService
     @Override
     public List<SysDictData> selectDictDataList(SysDictData dictData)
     {
-        return dictDataMapper.selectDictDataList(dictData);
+        return super.mapper.selectDictDataList(dictData);
     }
 
     /**
@@ -41,7 +39,7 @@ public class SysDictDataServiceImpl implements ISysDictDataService
     @Override
     public String selectDictLabel(String dictType, String dictValue)
     {
-        return dictDataMapper.selectDictLabel(dictType, dictValue);
+        return super.mapper.selectDictLabel(dictType, dictValue);
     }
 
     /**
@@ -53,7 +51,7 @@ public class SysDictDataServiceImpl implements ISysDictDataService
     @Override
     public SysDictData selectDictDataById(Long dictCode)
     {
-        return dictDataMapper.selectDictDataById(dictCode);
+        return super.mapper.selectDictDataById(dictCode);
     }
 
     /**
@@ -67,8 +65,8 @@ public class SysDictDataServiceImpl implements ISysDictDataService
         for (Long dictCode : dictCodes)
         {
             SysDictData data = selectDictDataById(dictCode);
-            dictDataMapper.deleteDictDataById(dictCode);
-            List<SysDictData> dictDatas = dictDataMapper.selectDictDataByType(data.getDictType());
+            super.mapper.deleteDictDataById(dictCode);
+            List<SysDictData> dictDatas = super.mapper.selectDictDataByType(data.getDictType());
             DictUtils.setDictCache(data.getDictType(), dictDatas);
         }
     }
@@ -82,10 +80,10 @@ public class SysDictDataServiceImpl implements ISysDictDataService
     @Override
     public int insertDictData(SysDictData data)
     {
-        int row = dictDataMapper.insertDictData(data);
+        int row = super.mapper.insertDictData(data);
         if (row > 0)
         {
-            List<SysDictData> dictDatas = dictDataMapper.selectDictDataByType(data.getDictType());
+            List<SysDictData> dictDatas = super.mapper.selectDictDataByType(data.getDictType());
             DictUtils.setDictCache(data.getDictType(), dictDatas);
         }
         return row;
@@ -100,10 +98,10 @@ public class SysDictDataServiceImpl implements ISysDictDataService
     @Override
     public int updateDictData(SysDictData data)
     {
-        int row = dictDataMapper.updateDictData(data);
+        int row = super.mapper.updateDictData(data);
         if (row > 0)
         {
-            List<SysDictData> dictDatas = dictDataMapper.selectDictDataByType(data.getDictType());
+            List<SysDictData> dictDatas = super.mapper.selectDictDataByType(data.getDictType());
             DictUtils.setDictCache(data.getDictType(), dictDatas);
         }
         return row;

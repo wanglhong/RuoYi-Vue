@@ -35,11 +35,7 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
-        <!-- pagehelper 分页插件 -->
-<!--        <dependency>-->
-<!--            <groupId>com.github.pagehelper</groupId>-->
-<!--            <artifactId>pagehelper-spring-boot-starter</artifactId>-->
-<!--        </dependency>-->
+        <!-- mybatis-flex 分页插件 -->
         <dependency>
             <groupId>com.mybatis-flex</groupId>
             <artifactId>mybatis-flex-spring-boot4-starter</artifactId>
@@ -48,22 +44,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-jdbc</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.mybatis-flex</groupId>-->
-<!--            <artifactId>mybatis-flex-core</artifactId>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>com.mybatis-flex</groupId>-->
-<!--            <artifactId>mybatis-flex-spring</artifactId>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>com.mybatis-flex</groupId>-->
-<!--            <artifactId>mybatis-flex-annotation</artifactId>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>com.mybatis-flex</groupId>-->
-<!--            <artifactId>mybatis-flex-processor</artifactId>-->
-<!--        </dependency>-->
 
         <!-- 自定义验证注解 -->
         <dependency>

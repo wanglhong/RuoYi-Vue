@@ -1,14 +1,16 @@
 package com.ruoyi.system.service;
 
 import java.util.List;
+import com.ruoyi.common.core.service.BaseService;
 import com.ruoyi.system.domain.SysNotice;
+import com.ruoyi.system.domain.SysNoticeRead;
 
 /**
  * 公告已读记录 服务层
  *
  * @author ruoyi
  */
-public interface ISysNoticeReadService
+public interface ISysNoticeReadService extends BaseService<SysNoticeRead>
 {
     /**
      * 标记已读（幂等，重复调用不报错）

@@ -93,23 +93,37 @@ public class MyBatisFlexConfig {
         return resources.toArray(new Resource[resources.size()]);
     }
 
+    private static final String RUO_YI_TYPE_ALIASES_PACKAGE = "com.ruoyi.**.domain";
+    private static final String RUO_YI_MAPPER_LOCATIONS = "classpath*:mapper/**/*Mapper.xml";
+    private static final String RUO_YI_CONFIG_LOCATION = "classpath:mybatis/mybatis-config.xml";
+
     @Bean
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
-//        String typeAliasesPackage = env.getProperty("mybatis.typeAliasesPackage");
-//        String mapperLocations = env.getProperty("mybatis.mapperLocations");
-//        String configLocation = env.getProperty("mybatis.configLocation");
-        String typeAliasesPackage = env.getProperty("mybatisFlex.typeAliasesPackage");
-        String mapperLocations = env.getProperty("mybatisFlex.mapperLocations");
-        String configLocation = env.getProperty("mybatisFlex.configLocation");
-        typeAliasesPackage = setTypeAliasesPackage(typeAliasesPackage);
-//        VFS.addImplClass(SpringBootVFS.class);
-
-//        final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
-        final SqlSessionFactoryBean sessionFactory = new FlexSqlSessionFactoryBean();
+        // 支持 kebab-case 和 camelCase 两种配置格式
+        String typeAliasesPackage = env.getProperty("mybatis-flex.type-aliases-package");
+        String mapperLocations = env.getProperty("mybatis-flex.mapper-locations");
+        String configLocation = env.getProperty("mybatis-flex.config-location");
+        if (StringUtils.isNotBlank(typeAliasesPackage)) {
+            typeAliasesPackage = setTypeAliasesPackage(typeAliasesPackage);
+        }
+        if (StringUtils.isEmpty(typeAliasesPackage)) {
+            typeAliasesPackage = RUO_YI_TYPE_ALIASES_PACKAGE;
+        } else {
+            typeAliasesPackage = RUO_YI_TYPE_ALIASES_PACKAGE + "," + typeAliasesPackage;
+        }
+        if (StringUtils.isEmpty(mapperLocations)) {
+            mapperLocations = RUO_YI_MAPPER_LOCATIONS;
+        } else {
+            mapperLocations = RUO_YI_MAPPER_LOCATIONS + "," + mapperLocations;
+        }
+        if (StringUtils.isEmpty(configLocation)) {
+            configLocation = RUO_YI_CONFIG_LOCATION;
+        }
+        final FlexSqlSessionFactoryBean sessionFactory = new FlexSqlSessionFactoryBean();
         sessionFactory.setDataSource(dataSource);
-//        sessionFactory.setTypeAliasesPackage(typeAliasesPackage);
-//        sessionFactory.setMapperLocations(resolveMapperLocations(StringUtils.split(mapperLocations, ",")));
-//        sessionFactory.setConfigLocation(new DefaultResourceLoader().getResource(configLocation));
+        sessionFactory.setTypeAliasesPackage(typeAliasesPackage);
+        sessionFactory.setMapperLocations(resolveMapperLocations(StringUtils.split(mapperLocations, ",")));
+        sessionFactory.setConfigLocation(new DefaultResourceLoader().getResource(configLocation));
         return sessionFactory.getObject();
     }
 

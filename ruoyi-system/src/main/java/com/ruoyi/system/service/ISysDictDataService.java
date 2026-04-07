@@ -2,13 +2,14 @@ package com.ruoyi.system.service;
 
 import java.util.List;
 import com.ruoyi.common.core.domain.entity.SysDictData;
+import com.ruoyi.common.core.service.BaseService;
 
 /**
  * 字典 业务层
  * 
  * @author ruoyi
  */
-public interface ISysDictDataService
+public interface ISysDictDataService extends BaseService<SysDictData>
 {
     /**
      * 根据条件分页查询字典数据

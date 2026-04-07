@@ -1,6 +1,8 @@
 package com.ruoyi.generator.service;
 
 import java.util.List;
+
+import com.ruoyi.common.core.service.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.common.core.text.Convert;
@@ -13,10 +15,8 @@ import com.ruoyi.generator.mapper.GenTableColumnMapper;
  * @author ruoyi
  */
 @Service
-public class GenTableColumnServiceImpl implements IGenTableColumnService 
+public class GenTableColumnServiceImpl extends BaseServiceImpl<GenTableColumnMapper, GenTableColumn> implements IGenTableColumnService
 {
-	@Autowired
-	private GenTableColumnMapper genTableColumnMapper;
 
 	/**
      * 查询业务字段列表
@@ -27,7 +27,7 @@ public class GenTableColumnServiceImpl implements IGenTableColumnService
 	@Override
 	public List<GenTableColumn> selectGenTableColumnListByTableId(Long tableId)
 	{
-	    return genTableColumnMapper.selectGenTableColumnListByTableId(tableId);
+	    return super.mapper.selectGenTableColumnListByTableId(tableId);
 	}
 	
     /**
@@ -39,7 +39,7 @@ public class GenTableColumnServiceImpl implements IGenTableColumnService
 	@Override
 	public int insertGenTableColumn(GenTableColumn genTableColumn)
 	{
-	    return genTableColumnMapper.insertGenTableColumn(genTableColumn);
+	    return super.mapper.insertGenTableColumn(genTableColumn);
 	}
 	
 	/**
@@ -51,7 +51,7 @@ public class GenTableColumnServiceImpl implements IGenTableColumnService
 	@Override
 	public int updateGenTableColumn(GenTableColumn genTableColumn)
 	{
-	    return genTableColumnMapper.updateGenTableColumn(genTableColumn);
+	    return super.mapper.updateGenTableColumn(genTableColumn);
 	}
 
 	/**
@@ -63,6 +63,6 @@ public class GenTableColumnServiceImpl implements IGenTableColumnService
 	@Override
 	public int deleteGenTableColumnByIds(String ids)
 	{
-		return genTableColumnMapper.deleteGenTableColumnByIds(Convert.toLongArray(ids));
+		return super.mapper.deleteGenTableColumnByIds(Convert.toLongArray(ids));
 	}
 }

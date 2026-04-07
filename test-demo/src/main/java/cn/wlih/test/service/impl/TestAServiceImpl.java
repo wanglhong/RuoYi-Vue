@@ -11,4 +11,8 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class TestAServiceImpl extends BaseServiceImpl<TestAMapper, TestA> implements TestAService {
 
+    public void test() {
+        super.mapper.selectAll();
+    }
+
 }

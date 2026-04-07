@@ -1,8 +1,8 @@
 package com.ruoyi.system.service.impl;
 
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.ruoyi.common.core.service.BaseServiceImpl;
 import com.ruoyi.system.domain.SysNoticeRead;
 import com.ruoyi.system.domain.SysNotice;
 import com.ruoyi.system.mapper.SysNoticeReadMapper;
@@ -14,11 +14,8 @@ import com.ruoyi.system.service.ISysNoticeReadService;
  * @author ruoyi
  */
 @Service
-public class SysNoticeReadServiceImpl implements ISysNoticeReadService
+public class SysNoticeReadServiceImpl extends BaseServiceImpl<SysNoticeReadMapper, SysNoticeRead> implements ISysNoticeReadService
 {
-    @Autowired
-    private SysNoticeReadMapper noticeReadMapper;
-
     /**
      * 标记已读
      */
@@ -28,7 +25,7 @@ public class SysNoticeReadServiceImpl implements ISysNoticeReadService
         SysNoticeRead record = new SysNoticeRead();
         record.setNoticeId(noticeId);
         record.setUserId(userId);
-        noticeReadMapper.insertNoticeRead(record);
+        super.mapper.insertNoticeRead(record);
     }
 
     /**
@@ -37,7 +34,7 @@ public class SysNoticeReadServiceImpl implements ISysNoticeReadService
     @Override
     public int selectUnreadCount(Long userId)
     {
-        return noticeReadMapper.selectUnreadCount(userId);
+        return super.mapper.selectUnreadCount(userId);
     }
 
     /**
@@ -46,7 +43,7 @@ public class SysNoticeReadServiceImpl implements ISysNoticeReadService
     @Override
     public List<SysNotice> selectNoticeListWithReadStatus(Long userId, int limit)
     {
-        return noticeReadMapper.selectNoticeListWithReadStatus(userId, limit);
+        return super.mapper.selectNoticeListWithReadStatus(userId, limit);
     }
 
     /**
@@ -59,7 +56,7 @@ public class SysNoticeReadServiceImpl implements ISysNoticeReadService
         {
             return;
         }
-        noticeReadMapper.insertNoticeReadBatch(userId, noticeIds);
+        super.mapper.insertNoticeReadBatch(userId, noticeIds);
     }
 
     /**
@@ -68,6 +65,6 @@ public class SysNoticeReadServiceImpl implements ISysNoticeReadService
     @Override
     public void deleteByNoticeIds(Long[] noticeIds)
     {
-        noticeReadMapper.deleteByNoticeIds(noticeIds);
+        super.mapper.deleteByNoticeIds(noticeIds);
     }
 }

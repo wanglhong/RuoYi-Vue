@@ -1,6 +1,8 @@
 package com.ruoyi.quartz.service.impl;
 
 import java.util.List;
+
+import com.ruoyi.common.core.service.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.quartz.domain.SysJobLog;
@@ -13,10 +15,8 @@ import com.ruoyi.quartz.service.ISysJobLogService;
  * @author ruoyi
  */
 @Service
-public class SysJobLogServiceImpl implements ISysJobLogService
+public class SysJobLogServiceImpl extends BaseServiceImpl<SysJobLogMapper, SysJobLog> implements ISysJobLogService
 {
-    @Autowired
-    private SysJobLogMapper jobLogMapper;
 
     /**
      * 获取quartz调度器日志的计划任务
@@ -27,7 +27,7 @@ public class SysJobLogServiceImpl implements ISysJobLogService
     @Override
     public List<SysJobLog> selectJobLogList(SysJobLog jobLog)
     {
-        return jobLogMapper.selectJobLogList(jobLog);
+        return super.mapper.selectJobLogList(jobLog);
     }
 
     /**
@@ -39,7 +39,7 @@ public class SysJobLogServiceImpl implements ISysJobLogService
     @Override
     public SysJobLog selectJobLogById(Long jobLogId)
     {
-        return jobLogMapper.selectJobLogById(jobLogId);
+        return super.mapper.selectJobLogById(jobLogId);
     }
 
     /**
@@ -50,7 +50,7 @@ public class SysJobLogServiceImpl implements ISysJobLogService
     @Override
     public void addJobLog(SysJobLog jobLog)
     {
-        jobLogMapper.insertJobLog(jobLog);
+        super.mapper.insertJobLog(jobLog);
     }
 
     /**
@@ -62,7 +62,7 @@ public class SysJobLogServiceImpl implements ISysJobLogService
     @Override
     public int deleteJobLogByIds(Long[] logIds)
     {
-        return jobLogMapper.deleteJobLogByIds(logIds);
+        return super.mapper.deleteJobLogByIds(logIds);
     }
 
     /**
@@ -73,7 +73,7 @@ public class SysJobLogServiceImpl implements ISysJobLogService
     @Override
     public int deleteJobLogById(Long jobId)
     {
-        return jobLogMapper.deleteJobLogById(jobId);
+        return super.mapper.deleteJobLogById(jobId);
     }
 
     /**
@@ -82,6 +82,6 @@ public class SysJobLogServiceImpl implements ISysJobLogService
     @Override
     public void cleanJobLog()
     {
-        jobLogMapper.cleanJobLog();
+        super.mapper.cleanJobLog();
     }
 }

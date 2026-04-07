@@ -1,6 +1,7 @@
 package com.ruoyi.system.service;
 
 import java.util.List;
+import com.ruoyi.common.core.service.BaseService;
 import com.ruoyi.system.domain.SysNotice;
 
 /**
@@ -8,7 +9,7 @@ import com.ruoyi.system.domain.SysNotice;
  * 
  * @author ruoyi
  */
-public interface ISysNoticeService
+public interface ISysNoticeService extends BaseService<SysNotice>
 {
     /**
      * 查询公告信息

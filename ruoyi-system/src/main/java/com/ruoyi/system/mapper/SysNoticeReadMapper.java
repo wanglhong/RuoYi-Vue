@@ -2,6 +2,7 @@ package com.ruoyi.system.mapper;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import com.mybatisflex.core.BaseMapper;
 import com.ruoyi.system.domain.SysNoticeRead;
 import com.ruoyi.system.domain.SysNotice;
 
@@ -10,7 +11,7 @@ import com.ruoyi.system.domain.SysNotice;
  *
  * @author ruoyi
  */
-public interface SysNoticeReadMapper
+public interface SysNoticeReadMapper extends BaseMapper<SysNoticeRead>
 {
     /**
      * 新增已读记录（忽略重复）
