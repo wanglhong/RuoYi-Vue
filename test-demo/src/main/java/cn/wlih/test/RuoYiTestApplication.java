@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * 若依框架测试项目-启动程序
  */
-@MapperScan({"com.ruoyi.**.domain", "cn.wlih.test.mapper"})
+@MapperScan({"cn.wlih.test.mapper"})
 @SpringBootApplication
 public class RuoYiTestApplication {
 
