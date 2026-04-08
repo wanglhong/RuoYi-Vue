@@ -7,6 +7,7 @@
 
 target/
 !.mvn/wrapper/maven-wrapper.jar
+.DS_Store
 
 ######################################################################
 # IDE
@@ -38,12 +39,12 @@ nbdist/
 
 ######################################################################
 # Others
-#*.log
+*.log
 *.xml.versionsBackup
 *.swp
 
 !*/build/*.java
 !*/build/*.html
 !*/build/*.xml
-#/**/application-dev.yml
+/**/application-dev.yml
 

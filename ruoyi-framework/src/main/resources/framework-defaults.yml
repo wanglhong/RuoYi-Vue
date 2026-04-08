@@ -47,6 +47,10 @@ user:
 
 # Spring配置
 spring:
+  # 启用全局懒加载 - 延迟非必要 Bean 的初始化
+  main:
+    lazy-initialization:
+      enabled: true
   # 资源信息
   messages:
     # 国际化资源文件路径
@@ -72,15 +76,15 @@ spring:
       # 初始连接数
       initialSize: 5
       # 最小连接池数量
-      minIdle: 10
+      minIdle: 5
       # 最大连接池数量
       maxActive: 20
       # 配置获取连接等待超时的时间
-      maxWait: 60000
+      maxWait: 5000
       # 配置连接超时时间
-      connectTimeout: 30000
+      connectTimeout: 5000
       # 配置网络超时时间
-      socketTimeout: 60000
+      socketTimeout: 10000
       # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
       timeBetweenEvictionRunsMillis: 60000
       # 配置一个连接在池中最小生存的时间，单位是毫秒
@@ -139,7 +143,7 @@ spring:
       # 密码
       password:
       # 连接超时时间
-      timeout: 10s
+      timeout: 5s
       lettuce:
         pool:
           # 连接池中的最小空闲连接
@@ -149,7 +153,10 @@ spring:
           # 连接池的最大数据库连接数
           max-active: 8
           # #连接池最大阻塞等待时间（使用负值表示没有限制）
-          max-wait: -1ms
+#          max-wait: -1ms
+          # 连接池最大阻塞等待时间 - 避免无限阻塞
+          max-wait: 2s
+
 
 # token配置
 token:
@@ -165,8 +172,6 @@ token:
 #  type-aliases-package: com.ruoyi.**.domain
 #  mapper-locations: classpath*:mapper/**/*Mapper.xml
 #  config-location: classpath:mybatis/mybatis-config.xml
-
-
 
 # PageHelper分页插件
 pagehelper:
