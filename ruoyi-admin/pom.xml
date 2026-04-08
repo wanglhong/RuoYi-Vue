@@ -36,16 +36,10 @@
             <artifactId>mysql-connector-j</artifactId>
         </dependency>
 
-        <!-- 核心模块-->
-        <dependency>
-            <groupId>com.ruoyi</groupId>
-            <artifactId>ruoyi-framework</artifactId>
-        </dependency>
-
         <!-- 系统业务模块 -->
         <dependency>
             <groupId>com.ruoyi</groupId>
-            <artifactId>ruoyi-system</artifactId>
+            <artifactId>ruoyi-system-web</artifactId>
         </dependency>
         <dependency>
             <groupId>com.ruoyi</groupId>

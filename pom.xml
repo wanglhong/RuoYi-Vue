@@ -162,6 +162,11 @@
                 <artifactId>ruoyi-system</artifactId>
                 <version>${ruoyi.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.ruoyi</groupId>
+                <artifactId>ruoyi-system-web</artifactId>
+                <version>${ruoyi.version}</version>
+            </dependency>
 
             <!-- 通用工具-->
             <dependency>
@@ -194,6 +199,7 @@
         <module>ruoyi-admin</module>
         <module>ruoyi-framework</module>
         <module>ruoyi-system</module>
+        <module>ruoyi-system-web</module>
         <module>ruoyi-quartz</module>
         <module>ruoyi-generator</module>
         <module>ruoyi-common</module>

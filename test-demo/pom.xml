@@ -25,12 +25,6 @@
             <optional>true</optional> <!-- 表示依赖不会传递 -->
         </dependency>
 
-        <!-- spring-doc -->
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-        </dependency>
-
         <!-- Mysql驱动包 -->
         <dependency>
             <groupId>com.mysql</groupId>
@@ -42,14 +36,18 @@
             <groupId>com.ruoyi</groupId>
             <artifactId>ruoyi-framework</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.ruoyi</groupId>-->
-<!--            <artifactId>system-sdk-db</artifactId>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>com.ruoyi</groupId>
-            <artifactId>system-sdk-http</artifactId>
+            <artifactId>ruoyi-system-web</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>system-sdk-db</artifactId>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.ruoyi</groupId>-->
+<!--            <artifactId>system-sdk-http</artifactId>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>org.projectlombok</groupId>
