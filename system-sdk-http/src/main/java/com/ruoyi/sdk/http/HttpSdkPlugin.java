@@ -44,13 +44,13 @@ public class HttpSdkPlugin implements SdkPlugin {
     @Override
     public void initialize() {
         log.info("正在初始化 " + PLUGIN_NAME + " 插件...");
-        
+
         // 初始化 HTTP 客户端相关资源
         if (httpClient == null) {
             this.httpClient = HttpClient.newHttpClient();
             log.info(PLUGIN_NAME + " 插件：已创建默认 HttpClient");
         }
-        
+
         log.info(PLUGIN_NAME + " 插件初始化完成");
     }
 
@@ -76,4 +76,5 @@ public class HttpSdkPlugin implements SdkPlugin {
     public HttpClient getHttpClient() {
         return httpClient;
     }
+
 }

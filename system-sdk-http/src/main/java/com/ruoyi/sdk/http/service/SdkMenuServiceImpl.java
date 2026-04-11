@@ -1,6 +1,8 @@
 package com.ruoyi.sdk.http.service;
 
 import com.ruoyi.sdk.service.SdkMenuService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Set;
 
@@ -9,17 +11,34 @@ import java.util.Set;
  *
  * @author ruoyi
  */
-public class SdkMenuServiceImpl implements SdkMenuService {
+public class SdkMenuServiceImpl extends BaseHttpService implements SdkMenuService {
 
+    private static final Logger log = LoggerFactory.getLogger(SdkMenuServiceImpl.class);
+
+    /**
+     * 根据用户ID查询权限
+     *
+     * @param userId 用户ID
+     * @return 权限列表
+     */
     @Override
     public Set<String> selectMenuPermsByUserId(Long userId) {
-        // TODO: 通过 HTTP 调用查询权限
-        return null;
+        // TODO ---> [HTTP调用] 根据用户ID查询权限
+        log.warn("TODO ---> [HTTP调用] 根据用户ID查询权限");
+        return Set.of();
     }
 
+    /**
+     * 根据角色ID查询权限
+     *
+     * @param roleId 角色ID
+     * @return 权限列表
+     */
     @Override
     public Set<String> selectMenuPermsByRoleId(Long roleId) {
-        // TODO: 通过 HTTP 调用查询权限
-        return null;
+        // TODO ---> [HTTP调用] 根据角色ID查询权限
+        log.warn("TODO ---> [HTTP调用] 根据角色ID查询权限");
+        return Set.of();
     }
+
 }
