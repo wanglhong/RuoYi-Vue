@@ -50,4 +50,5 @@ nbdist/
 !*/build/*.html
 !*/build/*.xml
 /**/application-dev.yml
+/**/application-prod.yml
 
